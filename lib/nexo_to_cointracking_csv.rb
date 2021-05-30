@@ -33,7 +33,7 @@ class NexoToCointrackingCSV
       elsif input_line.repayment?
         raise "Liquidation Row not found for repayment #{input_line.txn_id}" unless liquidation_row
         output_line = OutputLine.new(input_line)
-        output_line.buy_currency = 'USDT'
+        output_line.buy_currency = 'USD'
         output_line.buy_amount = liquidation_proceeds(liquidation_row, input_line)
         output_line.sell_currency = liquidation_row.currency
         output_line.sell_amount = liquidation_row.amount.strip.sub(/^\-/,'')
