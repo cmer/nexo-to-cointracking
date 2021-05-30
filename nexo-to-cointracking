@@ -1,0 +1,24 @@
+#!/usr/bin/env ruby
+
+require 'csv'
+begin; require 'pry'; rescue; end
+
+Dir[File.dirname(__FILE__) + '/lib/*.rb'].each {|file| require file }
+#
+# SPAGHETTI ALERT!!!!!
+# Definitely not my cleanest code, but gets the job done.
+#
+
+input_path = ARGV[0].to_s.strip
+output_path = ARGV[1].to_s.strip
+
+if input_path == ''
+  puts "Usage: nexo-to-cointracking input_path [output_path (optional)]"
+  exit 1
+end
+
+if output_path != ''
+  NexoToCointrackingCSV.new(input_path).save_to(output_path)
+else
+  NexoToCointrackingCSV.new(input_path).print
+end
